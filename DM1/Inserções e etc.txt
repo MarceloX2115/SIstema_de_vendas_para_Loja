@@ -1,0 +1,209 @@
+-- 1. Inserções de dados
+
+-- Formas de Pagamento
+INSERT INTO formas_pagamento (descricao, parcelas_maximas) VALUES
+('Crédito à Vista', 1),
+('Parcelado 3x', 3),
+('Parcelado 6x', 6),
+('Parcelado 12x', 12),
+('Débito Automático', 1),
+('Criptomoedas', 1),
+('Vale-Refeição', 1),
+('Duplicata Mercantil', 2),
+('Programa de Pontos', 1),
+('Assinatura Mensal', 12);
+
+-- Clientes
+INSERT INTO clientes (nome, email, telefone, cpf, endereco, data_nascimento, status) VALUES
+('Felipe Nogueira', 'felipe.n@tech.com', '(11) 91234-5678', '111.222.333-01', 'Rua das Palmeiras, 45 - SP', '1988-05-12', 'Ativo'),
+('Camila Dias', 'camila.d@mail.com', '(21) 92345-6789', '222.333.444-02', 'Av. Atlântica, 100 - RJ', '1992-08-20', 'Ativo'),
+('Ricardo Moura', 'ricardo.m@corp.com', '(31) 93456-7890', '333.444.555-03', 'Rua da Bahia, 200 - MG', '1975-11-03', 'Bloqueado'),
+('Isabela Castro', 'isabela.c@mail.com', '(41) 94567-8901', '444.555.666-04', 'Alameda Presidente, 300 - PR', '1990-02-28', 'Ativo'),
+('Gustavo Henrique', 'gustavo.h@tech.com', '(51) 95678-9012', '555.666.777-05', 'Av. Borges, 400 - RS', '1983-07-15', 'Inativo'),
+('Larissa Rios', 'larissa.r@mail.com', '(81) 96789-0123', '666.777.888-06', 'Rua do Sol, 500 - PE', '1995-04-10', 'Ativo'),
+('Marcos Vinicius', 'marcos.v@corp.com', '(71) 97890-1234', '777.888.999-07', 'Av. Paulista, 600 - BA', '1980-09-22', 'Ativo'),
+('Beatriz Luz', 'beatriz.l@mail.com', '(85) 98901-2345', '888.999.000-08', 'Rua das Flores, 700 - CE', '1993-12-05', 'Ativo'),
+('Rodrigo Pires', 'rodrigo.p@tech.com', '(61) 99012-3456', '999.000.111-09', 'SQN 302, Bloco A - DF', '1987-06-18', 'Ativo'),
+('Tatiane Silva', 'tatiane.s@mail.com', '(48) 90123-4567', '000.111.222-10', 'Rua João Pinto, 800 - SC', '1998-01-30', 'Inativo');
+
+-- Produtos
+INSERT INTO produtos (nome, descricao, preco, codigo_barras, categoria) VALUES
+('Monitor 4K 27"', 'IPS 144Hz HDR400', 2199.90, 'MON4K27ASUS', 'Eletrônicos'),
+('Teclado Mecânico', 'Switch Blue RGB', 349.90, 'TECMECRAZER', 'Eletrônicos'),
+('Vestido Longo', 'Seda estampada - M', 189.90, 'VESTIDOSEDA', 'Roupas'),
+('Whisky 12 anos', 'Single Malt 750ml', 249.90, 'WHISKY12GLEN', 'Alimentos'),
+('Mesa Digitalizadora', 'Área ativa 10x15cm', 499.90, 'TABWACOMPAN', 'Eletrônicos'),
+('Livro de Culinária', '100 receitas veganas', 59.90, 'LIVCULIVEGA', 'Livros'),
+('Bicicleta Urbana', 'Aro 29 21 marchas', 1299.90, 'BIKEURBSPEC', 'Brinquedos'),
+('Kit Maquiagem', 'Paleta 12 cores', 89.90, 'MAQUIPALETA', 'Outros'),
+('Headset Gamer', '7.1 Surround Sound', 399.90, 'HEADSETLOGI', 'Eletrônicos'),
+('Câmera Instantânea', 'Filme Polaroid', 299.90, 'CAMINSTFuji', 'Eletrônicos');
+
+-- Estoque
+INSERT INTO estoque (produto_id, quantidade, localizacao) VALUES
+(1, 8, 'Setor Monitores - A3'),
+(2, 25, 'Periféricos - P2'),
+(3, 12, 'Moda Feminina - MF1'),
+(4, 30, 'Bebidas - BB2'),
+(5, 5, 'Artistas - D1'),
+(6, 40, 'Livraria - L3'),
+(7, 7, 'Esportes - E5'),
+(8, 50, 'Beleza - B3'),
+(9, 15, 'Áudio - AD4'),
+(10, 20, 'Fotografia - F2');
+
+-- Pedidos
+INSERT INTO pedidos (cliente_id, data_pedido, status, forma_pagamento_id, valor_total) VALUES
+(1, '2023-10-05 14:30:00', 'Entregue', 1, 2199.90),
+(2, '2023-10-10 09:15:00', 'Enviado', 3, 349.90),
+(3, '2023-10-12 16:45:00', 'Cancelado', NULL, 189.90),
+(4, '2023-10-15 11:20:00', 'Processando', 4, 249.90),
+(5, '2023-10-18 13:10:00', 'Entregue', 2, 499.90),
+(6, '2023-10-20 10:30:00', 'Enviado', 5, 59.90),
+(7, '2023-10-22 15:00:00', 'Entregue', 6, 1299.90),
+(8, '2023-10-25 08:45:00', 'Processando', 7, 89.90),
+(9, '2023-10-28 17:30:00', 'Pendente', 8, 399.90),
+(10, '2023-11-01 12:00:00', 'Cancelado', NULL, 299.90);
+
+-- Itens de Pedido
+INSERT INTO itens_pedido (pedido_id, produto_id, quantidade, preco_unitario, desconto) VALUES
+(1, 1, 1, 2199.90, 0),
+(2, 2, 1, 349.90, 0),
+(3, 3, 1, 189.90, 0),
+(4, 4, 1, 249.90, 0),
+(5, 5, 1, 499.90, 0),
+(6, 6, 1, 59.90, 0),
+(7, 7, 1, 1299.90, 0),
+(8, 8, 1, 89.90, 0),
+(9, 9, 1, 399.90, 0),
+(10, 10, 1, 299.90, 0);
+
+-- 2. Atualizações de dados
+
+-- Aumento de 15% em produtos eletrônicos
+UPDATE produtos 
+SET preco = preco * 1.15 
+WHERE categoria = 'Eletrônicos';
+
+-- Atualizar status de pedidos antigos para 'Entregue'
+UPDATE pedidos 
+SET status = 'Entregue' 
+WHERE status = 'Pendente' AND data_pedido < '2023-10-25';
+
+-- Aplicar desconto de 10% em produtos da categoria Roupas
+UPDATE produtos
+SET preco = preco * 0.90
+WHERE categoria = 'Roupas';
+
+-- 3. Exclusões de dados
+
+-- Excluir cliente inativo que nunca fez pedido
+DELETE FROM clientes 
+WHERE cliente_id NOT IN (SELECT DISTINCT cliente_id FROM pedidos) AND status = 'Inativo';
+
+-- 4. Consultas
+
+-- 1. Listar todos os clientes ativos
+SELECT * FROM clientes WHERE status = 'Ativo';
+
+-- 2. Produtos com preço acima de R$ 500,00
+SELECT nome, preco FROM produtos WHERE preco > 500 ORDER BY preco DESC;
+
+-- 3. Pedidos realizados em outubro de 2023
+SELECT p.pedido_id, c.nome AS cliente, p.data_pedido, p.status
+FROM pedidos p
+JOIN clientes c ON p.cliente_id = c.cliente_id
+WHERE p.data_pedido BETWEEN '2023-10-01' AND '2023-10-31';
+
+-- 4. Total de vendas por forma de pagamento
+SELECT fp.descricao, COUNT(p.pedido_id) AS total_pedidos, SUM(p.valor_total) AS total_vendido
+FROM formas_pagamento fp
+LEFT JOIN pedidos p ON fp.forma_pagamento_id = p.forma_pagamento_id
+GROUP BY fp.descricao
+ORDER BY total_vendido DESC;
+
+-- 5. Produtos mais vendidos (quantidade)
+SELECT pr.nome, SUM(ip.quantidade) AS total_vendido
+FROM itens_pedido ip
+JOIN produtos pr ON ip.produto_id = pr.produto_id
+GROUP BY pr.nome
+ORDER BY total_vendido DESC;
+
+-- 6. Clientes que gastaram mais de R$ 1.000,00
+SELECT c.nome, SUM(p.valor_total) AS total_gasto
+FROM clientes c
+JOIN pedidos p ON c.cliente_id = p.cliente_id
+GROUP BY c.nome
+HAVING SUM(p.valor_total) > 1000
+ORDER BY total_gasto DESC;
+
+-- 7. Produtos com estoque baixo (menos de 10 unidades)
+SELECT p.nome, e.quantidade, p.categoria
+FROM produtos p
+JOIN estoque e ON p.produto_id = e.produto_id
+WHERE e.quantidade < 10
+ORDER BY e.quantidade;
+
+-- 8. Média de valor dos pedidos por status
+SELECT status, ROUND(AVG(valor_total), 2) AS media_valor
+FROM pedidos
+GROUP BY status;
+
+-- 9. Busca de produtos por termo
+SELECT nome, preco FROM produtos 
+WHERE nome LIKE '%Gamer%' OR descricao LIKE '%Gamer%';
+
+-- 10. Relação de itens de um pedido específico
+SELECT p.nome AS produto, ip.quantidade, ip.preco_unitario, ip.desconto, 
+       (ip.preco_unitario * ip.quantidade - ip.desconto) AS subtotal
+FROM itens_pedido ip
+JOIN produtos p ON ip.produto_id = p.produto_id
+WHERE ip.pedido_id = 1;
+
+-- 11. Pedidos com detalhes completos
+SELECT 
+    pd.pedido_id,
+    c.nome AS cliente,
+    pd.data_pedido,
+    pd.status,
+    fp.descricao AS forma_pagamento,
+    pd.valor_total,
+    STRING_AGG(pr.nome || ' (' || ip.quantidade || ' un)', ', ') AS produtos
+FROM 
+    pedidos pd
+JOIN 
+    clientes c ON pd.cliente_id = c.cliente_id
+LEFT JOIN 
+    formas_pagamento fp ON pd.forma_pagamento_id = fp.forma_pagamento_id
+JOIN 
+    itens_pedido ip ON pd.pedido_id = ip.pedido_id
+JOIN 
+    produtos pr ON ip.produto_id = pr.produto_id
+GROUP BY 
+    pd.pedido_id, c.nome, pd.data_pedido, pd.status, fp.descricao, pd.valor_total
+ORDER BY 
+    pd.data_pedido DESC;
+
+-- 12. Clientes que compraram produtos eletrônicos
+SELECT DISTINCT c.nome, c.email
+FROM clientes c
+JOIN pedidos p ON c.cliente_id = p.cliente_id
+JOIN itens_pedido ip ON p.pedido_id = ip.pedido_id
+WHERE ip.produto_id IN (
+    SELECT produto_id FROM produtos WHERE categoria = 'Eletrônicos'
+);
+
+-- 13. Categorias com vendas superiores a R$ 500
+SELECT 
+    p.categoria, 
+    SUM(ip.preco_unitario * ip.quantidade - ip.desconto) AS total_vendido
+FROM 
+    itens_pedido ip
+JOIN 
+    produtos p ON ip.produto_id = p.produto_id
+GROUP BY 
+    p.categoria
+HAVING 
+    SUM(ip.preco_unitario * ip.quantidade - ip.desconto) > 500
+ORDER BY 
+    total_vendido DESC; 
