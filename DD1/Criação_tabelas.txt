@@ -1,5 +1,5 @@
--- 1) Criação das tabelas 
-drop table clientes;
+-- 1. Criação das tabelas
+
 CREATE TABLE clientes (
     cliente_id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -10,16 +10,14 @@ CREATE TABLE clientes (
     cpf VARCHAR(14) UNIQUE NOT NULL,
     endereco TEXT
 );
-select * from clientes;
-drop table formas_pagamento;
+
 CREATE TABLE formas_pagamento (
     forma_pagamento_id SERIAL PRIMARY KEY,
     descricao VARCHAR(50) NOT NULL UNIQUE,
     parcelas_maximas INT CHECK (parcelas_maximas > 0) DEFAULT 1,
     ativo BOOLEAN DEFAULT TRUE
 );
-select * from clientes;
-drop table produtos;
+
 CREATE TABLE produtos (
     produto_id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -29,9 +27,7 @@ CREATE TABLE produtos (
     categoria VARCHAR(50),
     data_cadastro DATE DEFAULT CURRENT_DATE
 );
-select * from produtos;
 
-drop table estoque;
 CREATE TABLE estoque (
     estoque_id SERIAL PRIMARY KEY,
     produto_id INT NOT NULL,
@@ -40,9 +36,7 @@ CREATE TABLE estoque (
     data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (produto_id) REFERENCES produtos(produto_id) ON DELETE CASCADE
 );
-select * from estoque;
 
-drop table pedidos;
 CREATE TABLE pedidos (
     pedido_id SERIAL PRIMARY KEY,
     cliente_id INT NOT NULL,
@@ -53,9 +47,7 @@ CREATE TABLE pedidos (
     FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id),
     FOREIGN KEY (forma_pagamento_id) REFERENCES formas_pagamento(forma_pagamento_id)
 );
-select * from pedidos;
 
-drop table itens_pedido;
 CREATE TABLE itens_pedido (
     item_id SERIAL PRIMARY KEY,
     pedido_id INT NOT NULL,
@@ -67,3 +59,12 @@ CREATE TABLE itens_pedido (
     FOREIGN KEY (produto_id) REFERENCES produtos(produto_id),
     UNIQUE (pedido_id, produto_id)
 );
+
+-- 2. Alterações nas tabelas após criação
+
+-- Adicionando coluna de data de nascimento
+ALTER TABLE clientes ADD COLUMN data_nascimento DATE;
+
+-- Adicionando restrição de categoria
+ALTER TABLE produtos ADD CONSTRAINT check_categoria 
+CHECK (categoria IN ('Eletrônicos', 'Roupas', 'Alimentos', 'Livros', 'Brinquedos', 'Outros'));
