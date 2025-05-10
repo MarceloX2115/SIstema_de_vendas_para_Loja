@@ -60,4 +60,7 @@ O banco simula uma loja virtual de **produtos variados** (eletrônicos, roupas, 
 - Compatível com PostgreSQL 12+
 - Ideal para estudos acadêmicos ou protótipos
 
+**Link do vídeo:**
+- https://youtu.be/VhscEmYm0kM?si=_uwEusZZM_kFVje2
+
 *"Um sistema completo para aprender na prática como bancos de dados relacionais funcionam em ambientes de e-commerce reais."*
